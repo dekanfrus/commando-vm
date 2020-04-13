@@ -47,14 +47,14 @@ function prompt
     return " "
 }
 "@
-New-Item -ItemType File -Path $profile -Force | Out-Null
-Set-Content -Path $profile -Value $psprompt
-# Add timestamp to cmd prompt
-# Note: The string below is base64-encoded due to issues properly escaping the '$' character in PowersShell
-#   Offending string: "Y21kIC9jICdzZXR4IFBST01QVCBDT01NQU5ETyRTJGQkcyR0JF8kcCQrJGcn"
-#   Resolves to: "cmd /c 'setx PROMPT COMMANDO$S$d$s$t$_$p$+$g'"
-iex ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Y21kIC9jICdzZXR4IFBST01QVCBDT01NQU5ETyRTJGQkcyR0JF8kcCQrJGcn"))) | Out-Null
-Write-Host "[+] Timestamps added to cmd prompt and PowerShell" -ForegroundColor Green
+#New-Item -ItemType File -Path $profile -Force | Out-Null
+#Set-Content -Path $profile -Value $psprompt
+## Add timestamp to cmd prompt
+## Note: The string below is base64-encoded due to issues properly escaping the '$' character in PowersShell
+##   Offending string: "Y21kIC9jICdzZXR4IFBST01QVCBDT01NQU5ETyRTJGQkcyR0JF8kcCQrJGcn"
+##   Resolves to: "cmd /c 'setx PROMPT COMMANDO$S$d$s$t$_$p$+$g'"
+#iex ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Y21kIC9jICdzZXR4IFBST01QVCBDT01NQU5ETyRTJGQkcyR0JF8kcCQrJGcn"))) | Out-Null
+#Write-Host "[+] Timestamps added to cmd prompt and PowerShell" -ForegroundColor Green
 
 #### Fix shift+space in powershell
 # https://superuser.com/questions/1365875/shiftspace-not-working-in-powershell
@@ -72,81 +72,81 @@ try {
   Write-Host "`tCould not pin $target_file to the taskbar" -ForegroundColor Red
 }
 # CMD prompt
-$target_file = Join-Path ${Env:WinDir} "system32\cmd.exe"
-$target_dir = ${Env:UserProfile}
-$target_args = '/K "cd ' + ${Env:UserProfile} + '"'
-$shortcut = Join-Path ${Env:UserProfile} "temp\cmd.lnk"
-Install-ChocolateyShortcut -shortcutFilePath $shortcut -targetPath $target_file -Arguments $target_args -WorkingDirectory $target_dir -PinToTaskbar -RunasAdmin
-try {
-  Write-Host "`tPinning $target_file to taskbar" -ForegroundColor Green
-  syspin.exe "$shortcut" 5387
-} catch {
-  Write-Host "`tCould not pin $target_file to the taskbar" -ForegroundColor Red
-}
-# Powershell
-$target_file = Join-Path (Join-Path ${Env:WinDir} "system32\WindowsPowerShell\v1.0") "powershell.exe"
-$target_dir = ${Env:UserProfile}
-$target_args = '-NoExit -Command "cd ' + "${Env:UserProfile}" + '"'
-$shortcut = Join-Path ${Env:UserProfile} "temp\PowerShell.lnk"
-Install-ChocolateyShortcut -shortcutFilePath $shortcut -targetPath $target_file -Arguments $target_args -WorkingDirectory $target_dir -PinToTaskbar -RunasAdmin
-try {
-  Write-Host "`tPinning $target_file to taskbar" -ForegroundColor Green
-  syspin.exe "$shortcut" 5387
-} catch {
-  Write-Host "`tCould not pin $target_file to the taskbar" -ForegroundColor Red
-}
+#$target_file = Join-Path ${Env:WinDir} "system32\cmd.exe"
+#$target_dir = ${Env:UserProfile}
+#$target_args = '/K "cd ' + ${Env:UserProfile} + '"'
+#$shortcut = Join-Path ${Env:UserProfile} "temp\cmd.lnk"
+#Install-ChocolateyShortcut -shortcutFilePath $shortcut -targetPath $target_file -Arguments $target_args -WorkingDirectory $target_dir -PinToTaskbar -RunasAdmin
+#try {
+#  Write-Host "`tPinning $target_file to taskbar" -ForegroundColor Green
+#  syspin.exe "$shortcut" 5387
+#} catch {
+#  Write-Host "`tCould not pin $target_file to the taskbar" -ForegroundColor Red
+#}
+## Powershell
+#$target_file = Join-Path (Join-Path ${Env:WinDir} "system32\WindowsPowerShell\v1.0") "powershell.exe"
+#$target_dir = ${Env:UserProfile}
+#$target_args = '-NoExit -Command "cd ' + "${Env:UserProfile}" + '"'
+#$shortcut = Join-Path ${Env:UserProfile} "temp\PowerShell.lnk"
+#Install-ChocolateyShortcut -shortcutFilePath $shortcut -targetPath $target_file -Arguments $target_args -WorkingDirectory $target_dir -PinToTaskbar -RunasAdmin
+#try {
+#  Write-Host "`tPinning $target_file to taskbar" -ForegroundColor Green
+#  syspin.exe "$shortcut" 5387
+#} catch {
+#  Write-Host "`tCould not pin $target_file to the taskbar" -ForegroundColor Red
+#}
 
 
 #### Rename the computer ####
-Write-Host "[+] Renaming host to 'commando'" -ForegroundColor Green
-(Get-WmiObject win32_computersystem).rename("commando") | Out-Null
-Write-Host "`t[-] Change will take effect after a restart" -ForegroundColor Yellow
+#Write-Host "[+] Renaming host to 'commando'" -ForegroundColor Green
+#(Get-WmiObject win32_computersystem).rename("commando") | Out-Null
+#Write-Host "`t[-] Change will take effect after a restart" -ForegroundColor Yellow
 
 
 #### Update background ####
-Write-Host "[+] Changing Desktop Background" -ForegroundColor Green
-# Set desktop background to black
-Set-ItemProperty -Path 'HKCU:\Control Panel\Colors' -Name Background -Value "0 0 0" -Force | Out-Null
-# Set desktop wallpaper using WallpaperChanger utility
-$wallpaperName = 'LightMale_Red.png'
-$fileBackground = Join-Path $toolsDir $wallpaperName
-$publicWallpaper = Join-Path ${env:public} $wallpaperName
-$WallpaperChanger = Join-Path $toolsDir 'WallpaperChanger.exe'
-Invoke-Expression "$WallpaperChanger $fileBackground 3"
-# Copy background images
-$backgroundzip = 'Backgrounds.7z'
-$backgrounds = Join-Path $toolsDir $backgroundzip
-Invoke-Expression "copy $backgrounds ${Env:USERPROFILE}\Pictures"
-Write-Host "`t[+] Alternative backgrounds copied to ${Env:USERPROFILE}\Pictures" -ForegroundColor Yellow
-# Copy Logos
-$backgroundzip = 'CommandoVMLogos.7z'
-$backgrounds = Join-Path $toolsDir $backgroundzip
-Invoke-Expression "copy $backgrounds ${Env:USERPROFILE}\Pictures"
-Write-Host "`t[+] Commando logos copied to ${Env:USERPROFILE}\Pictures" -ForegroundColor Yellow
-
-foreach ($item in "0", "1", "2") {
-  # Try to set it multiple times! Windows 10 is not consistent
-  if ((Test-Path $publicWallpaper) -eq $false)
-  {
-    Copy-Item -Path $fileBackground -Destination $publicWallpaper -Force 
-  }
-  Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name Wallpaper -value $publicWallpaper
-  Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name TileWallpaper -value "0" -Force
-  Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name WallpaperStyle -value "6" -Force
-  Sleep -seconds 3
-  rundll32.exe user32.dll, UpdatePerUserSystemParameters, 1, True
-}
+#Write-Host "[+] Changing Desktop Background" -ForegroundColor Green
+## Set desktop background to black
+#Set-ItemProperty -Path 'HKCU:\Control Panel\Colors' -Name Background -Value "0 0 0" -Force | Out-Null
+## Set desktop wallpaper using WallpaperChanger utility
+#$wallpaperName = 'LightMale_Red.png'
+#$fileBackground = Join-Path $toolsDir $wallpaperName
+#$publicWallpaper = Join-Path ${env:public} $wallpaperName
+#$WallpaperChanger = Join-Path $toolsDir 'WallpaperChanger.exe'
+#Invoke-Expression "$WallpaperChanger $fileBackground 3"
+## Copy background images
+#$backgroundzip = 'Backgrounds.7z'
+#$backgrounds = Join-Path $toolsDir $backgroundzip
+#Invoke-Expression "copy $backgrounds ${Env:USERPROFILE}\Pictures"
+#Write-Host "`t[+] Alternative backgrounds copied to ${Env:USERPROFILE}\Pictures" -ForegroundColor Yellow
+## Copy Logos
+#$backgroundzip = 'CommandoVMLogos.7z'
+#$backgrounds = Join-Path $toolsDir $backgroundzip
+#Invoke-Expression "copy $backgrounds ${Env:USERPROFILE}\Pictures"
+#Write-Host "`t[+] Commando logos copied to ${Env:USERPROFILE}\Pictures" -ForegroundColor Yellow
+#
+#foreach ($item in "0", "1", "2") {
+#  # Try to set it multiple times! Windows 10 is not consistent
+#  if ((Test-Path $publicWallpaper) -eq $false)
+#  {
+#    Copy-Item -Path $fileBackground -Destination $publicWallpaper -Force 
+#  }
+#  Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name Wallpaper -value $publicWallpaper
+#  Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name TileWallpaper -value "0" -Force
+#  Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name WallpaperStyle -value "6" -Force
+#  Sleep -seconds 3
+#  rundll32.exe user32.dll, UpdatePerUserSystemParameters, 1, True
+#}
   
 
 # Copy readme.txt on the Desktop
-Write-Host "[+] Copying README.txt to Desktop" -ForegroundColor Green
-$fileReadme = Join-Path $toolsDir 'readme.txt'
-$desktopReadme = Join-Path ${Env:USERPROFILE} "Desktop\README.txt"
-try {
-  Copy-Item $fileReadme $desktopReadme -Force -ErrorAction SilentlyContinue
-} catch {
-  Write-Host "Could not copy Readme to Desktop. Please visit github to review."
-}
+#Write-Host "[+] Copying README.txt to Desktop" -ForegroundColor Green
+#$fileReadme = Join-Path $toolsDir 'readme.txt'
+#$desktopReadme = Join-Path ${Env:USERPROFILE} "Desktop\README.txt"
+#try {
+#  Copy-Item $fileReadme $desktopReadme -Force -ErrorAction SilentlyContinue
+#} catch {
+#  Write-Host "Could not copy Readme to Desktop. Please visit github to review."
+#}
 
 # Fix PATH issues with Python installers #18
 $paths = @(

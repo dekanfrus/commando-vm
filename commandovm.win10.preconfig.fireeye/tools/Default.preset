@@ -114,11 +114,11 @@ DisableAeroShake              # EnableAeroShake
 DisableAccessibilityKeys        # EnableAccessibilityKeys
 ShowTaskManagerDetails          # HideTaskManagerDetails
 ShowFileOperationsDetails       # HideFileOperationsDetails
-# EnableFileDeleteConfirm       # DisableFileDeleteConfirm
+EnableFileDeleteConfirm       # DisableFileDeleteConfirm
 HideTaskbarSearch               # ShowTaskbarSearchIcon         # ShowTaskbarSearchBox
 ShowTaskView                    # HideTaskView
 # ShowSmallTaskbarIcons           # ShowLargeTaskbarIcons
-SetTaskbarCombineWhenFull       # SetTaskbarCombineNever        # SetTaskbarCombineAlways
+#SetTaskbarCombineWhenFull        SetTaskbarCombineNever        # SetTaskbarCombineAlways
 HideTaskbarPeopleIcon           # ShowTaskbarPeopleIcon
 ShowTrayIcons                   # HideTrayIcons
 # ShowSecondsInTaskbar          # HideSecondsFromTaskbar
@@ -131,7 +131,7 @@ DisableShortcutInName           # EnableShortcutInName
 # HideShortcutArrow             # ShowShortcutArrow
 SetVisualFXPerformance          # SetVisualFXAppearance
 # EnableTitleBarColor           # DisableTitleBarColor
-EnableDarkTheme               # DisableDarkTheme
+# EnableDarkTheme               # DisableDarkTheme
 # AddENKeyboard                 # RemoveENKeyboard
 EnableNumlock                 # DisableNumlock
 # DisableEnhPointerPrecision    # EnableEnhPointerPrecision
@@ -142,14 +142,14 @@ EnableNumlock                 # DisableNumlock
 DisableF1HelpKey                # EnableF1HelpKey
 
 ### Explorer UI Tweaks ###
-ShowExplorerTitleFullPath     # HideExplorerTitleFullPath
+#ShowExplorerTitleFullPath     # HideExplorerTitleFullPath
 ShowKnownExtensions             # HideKnownExtensions
 ShowHiddenFiles                 # HideHiddenFiles
 ShowSuperHiddenFiles          # HideSuperHiddenFiles
 ShowEmptyDrives               # HideEmptyDrives
 ShowFolderMergeConflicts      # HideFolderMergeConflicts
-EnableNavPaneExpand             # DisableNavPaneExpand
-ShowNavPaneAllFolders         # HideNavPaneAllFolders
+# EnableNavPaneExpand             # DisableNavPaneExpand
+# ShowNavPaneAllFolders         # HideNavPaneAllFolders
 # EnableFldrSeparateProcess     # DisableFldrSeparateProcess
 # EnableRestoreFldrWindows      # DisableRestoreFldrWindows
 # ShowEncCompFilesColor         # HideEncCompFilesColor
@@ -158,7 +158,7 @@ ShowNavPaneAllFolders         # HideNavPaneAllFolders
 HideSyncNotifications           # ShowSyncNotifications
 HideRecentShortcuts             # ShowRecentShortcuts
 SetExplorerThisPC               # SetExplorerQuickAccess
-HideQuickAccess                 # ShowQuickAccess
+# HideQuickAccess                 # ShowQuickAccess
 # HideRecycleBinFromDesktop     # ShowRecycleBinOnDesktop
 ShowThisPCOnDesktop             # HideThisPCFromDesktop
 # ShowUserFolderOnDesktop       # HideUserFolderFromDesktop
@@ -173,14 +173,14 @@ ShowThisPCOnDesktop             # HideThisPCFromDesktop
 # HideDownloadsFromExplorer     # ShowDownloadsInExplorer
 HideMusicFromThisPC             # ShowMusicInThisPC
 HideMusicFromExplorer         # ShowMusicInExplorer
-HidePicturesFromThisPC          # ShowPicturesInThisPC
-HidePicturesFromExplorer      # ShowPicturesInExplorer
+# HidePicturesFromThisPC          # ShowPicturesInThisPC
+# HidePicturesFromExplorer      # ShowPicturesInExplorer
 HideVideosFromThisPC            # ShowVideosInThisPC
 HideVideosFromExplorer        # ShowVideosInExplorer
 Hide3DObjectsFromThisPC         # Show3DObjectsInThisPC
 Hide3DObjectsFromExplorer     # Show3DObjectsInExplorer
-HideIncludeInLibraryMenu      # ShowIncludeInLibraryMenu
-HideGiveAccessToMenu          # ShowGiveAccessToMenu
+# HideIncludeInLibraryMenu      # ShowIncludeInLibraryMenu
+# HideGiveAccessToMenu          # ShowGiveAccessToMenu
 # HideShareMenu                 # ShowShareMenu
 # DisableThumbnails             # EnableThumbnails
 DisableThumbnailCache           # EnableThumbnailCache
@@ -201,7 +201,7 @@ DisableIEFirstRun               # EnableIEFirstRun
 DisableFirstLogonAnimation      # EnableFirstLogonAnimation
 DisableMediaSharing             # EnableMediaSharing
 EnableDeveloperMode           # DisableDeveloperMode
-# UninstallMediaPlayer          # InstallMediaPlayer
+UninstallMediaPlayer          # InstallMediaPlayer
 # UninstallInternetExplorer     # InstallInternetExplorer
 # UninstallWorkFolders          # InstallWorkFolders
 # UninstallPowerShellV2         # InstallPowerShellV2
